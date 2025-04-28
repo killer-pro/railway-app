@@ -37,8 +37,8 @@ cd frontend && npm start
 
 - Crée un fichier `.env` dans `backend/` avec :
   ```env
-  DATABASE_URL=postgresql://user:password@host:port/dbname
-  PORT=3001
+  DATABASE_URL=postgresql://postgres:IrykdMRYO0dsPHjjhXFhBAAlQ0TxXLOz@postgres.railway.internal:5432/railway
+  PORT=5000
   ```
 - Pour Railway, configure les variables d'environnement dans le dashboard Railway.
 

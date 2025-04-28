@@ -51,3 +51,12 @@ npm test
 ```
 npm run dev
 ```
+
+Champs à créer
+
+| Nom du champ | Type | Contraintes | Description |
+|--------------|-----------|---------------------|----------------------------|
+| id | uuid | PRIMARY KEY, DEFAULT gen_random_uuid() | Identifiant unique |
+| title | text | NOT NULL | Titre de la tâche |
+| completed | boolean | NOT NULL, DEFAULT false | Statut (terminée ou non) |
+| "user" | text | (optionnel) | Nom d'utilisateur ou id |

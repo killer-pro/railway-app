@@ -1,23 +1,75 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import { getTasks, addTask, updateTask, deleteTask } from './api';
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+  const [newTitle, setNewTitle] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  async function fetchTasks() {
+    setLoading(true);
+    const data = await getTasks();
+    setTasks(data);
+    setLoading(false);
+  }
+
+  async function handleAddTask(e) {
+    e.preventDefault();
+    if (!newTitle.trim()) return;
+    await addTask({ title: newTitle, completed: false });
+    setNewTitle('');
+    fetchTasks();
+  }
+
+  async function handleToggleComplete(task) {
+    await updateTask(task.id, { completed: !task.completed });
+    fetchTasks();
+  }
+
+  async function handleDelete(id) {
+    await deleteTask(id);
+    fetchTasks();
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Gestionnaire de tâches</h1>
+      <form onSubmit={handleAddTask} style={{ marginBottom: 20 }}>
+        <input
+          value={newTitle}
+          onChange={e => setNewTitle(e.target.value)}
+          placeholder="Nouvelle tâche"
+        />
+        <button type="submit">Ajouter</button>
+      </form>
+      {loading ? (
+        <p>Chargement...</p>
+      ) : (
+        <ul style={{ listStyle: 'none', padding: 0 }}>
+          {tasks.map(task => (
+            <li key={task.id} style={{ marginBottom: 10 }}>
+              <span
+                style={{
+                  textDecoration: task.completed ? 'line-through' : 'none',
+                  marginRight: 10,
+                  cursor: 'pointer',
+                }}
+                onClick={() => handleToggleComplete(task)}
+              >
+                {task.title}
+              </span>
+              <button onClick={() => handleDelete(task.id)} style={{ marginLeft: 10 }}>
+                Supprimer
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
