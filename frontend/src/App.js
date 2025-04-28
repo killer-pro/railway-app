@@ -53,16 +53,22 @@ function App() {
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {tasks.map(task => (
             <li key={task.id} style={{ marginBottom: 10 }}>
-              <span
+              <button
+                type="button"
                 style={{
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
                   textDecoration: task.completed ? 'line-through' : 'none',
                   marginRight: 10,
                   cursor: 'pointer',
+                  color: 'inherit',
+                  font: 'inherit',
                 }}
                 onClick={() => handleToggleComplete(task)}
               >
                 {task.title}
-              </span>
+              </button>
               <button onClick={() => handleDelete(task.id)} style={{ marginLeft: 10 }}>
                 Supprimer
               </button>
