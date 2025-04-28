@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestionnaire de tâches</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f8fafc; }
+    .container { max-width: 500px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 16px #0001; padding: 32px; }
+    h1 { color: #6366f1; text-align: center; }
+    form { display: flex; gap: 10px; margin-bottom: 24px; }
+    input[type="text"] { flex: 1; padding: 8px; border-radius: 6px; border: 1px solid #c7d2fe; }
+    button { background: #6366f1; color: #fff; border: none; border-radius: 6px; padding: 8px 16px; cursor: pointer; }
+    ul { list-style: none; padding: 0; }
+    li { display: flex; align-items: center; margin-bottom: 10px; background: #f1f5f9; border-radius: 6px; padding: 8px 10px; }
+    .completed { text-decoration: line-through; color: #a5b4fc; }
+    .actions { margin-left: auto; display: flex; gap: 8px; }
+    .delete-btn { background: #f87171; }
+    .delete-btn:hover { background: #dc2626; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gestionnaire de tâches</h1>
+    <form action="/tasks/add" method="POST">
+      <input type="text" name="title" placeholder="Nouvelle tâche" required>
+      <button type="submit">Ajouter</button>
+    </form>
+    <ul>
+      <% tasks.forEach(task => { %>
+        <li>
+          <form action="/tasks/toggle/<%= task.id %>" method="POST" style="margin:0;">
+            <button type="submit" style="background:none;border:none;cursor:pointer;">
+              <span class="<%= task.completed ? 'completed' : '' %>"><%= task.title %></span>
+            </button>
+          </form>
+          <div class="actions">
+            <form action="/tasks/delete/<%= task.id %>" method="POST" style="margin:0;">
+              <button type="submit" class="delete-btn">Supprimer</button>
+            </form>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</body>
+</html> 

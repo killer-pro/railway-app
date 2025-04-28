@@ -19,24 +19,9 @@ jobs:
           node-version: '18'
 
       - name: Install backend dependencies
-        run: |
-          cd backend
-          npm install
-
-      - name: Install frontend dependencies
-        run: |
-          cd frontend
-          npm install
-
-      - name: Run backend tests (optionnel)
-        run: |
-          cd backend
-          npm test || echo "Pas de tests définis"
-
-      - name: Install Railway CLI
-        run: npm install -g @railway/cli
+        run: npm install
 
       - name: Deploy to Railway
-        run: railway up
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        uses: railwayapp/railway-action@v1
+        with:
+          railwayToken: ${{ secrets.RAILWAY_TOKEN }}
