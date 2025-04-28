@@ -17,11 +17,3 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-
-      - name: Run tests (optional)
-        run: npm test
-
-      - name: Deploy to Railway
-        uses: railwayapp/cli-action@v1
-        with:
-          railwayToken: ${{ secrets.RAILWAY_TOKEN }}
