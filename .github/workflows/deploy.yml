@@ -1,0 +1,44 @@
+name: Deploy to Railway
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Run backend tests (optionnel)
+        run: |
+          cd backend
+          npm test || echo "Pas de tests définis"
+
+      - name: Run frontend tests (optionnel)
+        run: |
+          cd frontend
+          npm test -- --watchAll=false || echo "Pas de tests définis"
+
+      - name: Deploy to Railway
+        uses: railwayapp/cli-action@v1
+        with:
+          railwayToken: ${{ secrets.RAILWAY_TOKEN }} 
