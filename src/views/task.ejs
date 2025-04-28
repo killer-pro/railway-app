@@ -1,0 +1,40 @@
+<div class="task-container">
+    <h1>Mes tâches</h1>
+
+    <!-- Formulaire pour ajouter une tâche -->
+    <form action="/tasks/add" method="POST" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="title" class="form-control" placeholder="Nouvelle tâche..." required>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </div>
+    </form>
+
+    <!-- Liste des tâches -->
+    <div class="list-group mb-4">
+        <% if (tasks && tasks.length > 0) { %>
+            <% tasks.forEach(task => { %>
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="<%= task.completed ? 'task-completed' : '' %>">
+                        <%= task.title %>
+                    </div>
+                    <div class="btn-group">
+                        <form action="/tasks/toggle/<%= task.id %>" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-sm <%= task.completed ? 'btn-outline-secondary' : 'btn-outline-success' %> btn-action">
+                                <%= task.completed ? 'Annuler' : 'Terminer' %>
+                            </button>
+                        </form>
+                        <form action="/tasks/delete/<%= task.id %>" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-sm btn-outline-danger btn-action" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche?')">
+                                Supprimer
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <div class="list-group-item text-center">
+                Aucune tâche pour le moment. Ajoutez-en une !
+            </div>
+        <% } %>
+    </div>
+</div>

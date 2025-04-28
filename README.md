@@ -2,14 +2,6 @@
 
 Ce projet est une application de gestion de tâches collaborative (ToDo App) déployée sur Railway avec CI/CD via GitHub Actions.
 
-## Structure du projet
-
-- `backend/` : API Node.js (Express) connectée à PostgreSQL
-- `frontend/` : Application React
-- `.github/workflows/` : Déploiement continu
-
----
-
 ## 🚀 Démarrage rapide
 
 ### 1. Cloner le dépôt
@@ -18,17 +10,10 @@ git clone <url-du-repo>
 cd railway-app
 ```
 
-### 2. Installer les dépendances
-```bash
-cd backend && npm install
-cd ../frontend && npm install
-```
-
 ### 3. Lancer en local
 Dans deux terminaux séparés :
 ```bash
-cd backend && npm start
-cd frontend && npm start
+npm start
 ```
 
 ---
@@ -92,8 +77,7 @@ cd frontend && npm start
 
 ## 📁 Dossiers importants
 
-- `backend/` : Code source de l'API, connexion DB, routes, modèles
-- `frontend/` : Code source React, composants, pages
+- `/` : Code source de l'API, connexion DB, routes, modèles ,pages
 - `.github/workflows/` : Fichiers de CI/CD
 
 ---
