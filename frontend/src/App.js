@@ -50,26 +50,34 @@ function App() {
       {loading ? (
         <p>Chargement...</p>
       ) : (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
+        <ul>
           {tasks.map(task => (
-            <li key={task.id} style={{ marginBottom: 10 }}>
+            <li key={task.id}>
               <button
                 type="button"
+                className={`task-title${task.completed ? ' completed' : ''}`}
+                onClick={() => handleToggleComplete(task)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' || e.key === ' ') handleToggleComplete(task);
+                }}
+                aria-pressed={task.completed}
                 style={{
                   background: 'none',
                   border: 'none',
                   padding: 0,
-                  textDecoration: task.completed ? 'line-through' : 'none',
-                  marginRight: 10,
+                  margin: 0,
                   cursor: 'pointer',
-                  color: 'inherit',
-                  font: 'inherit',
+                  textAlign: 'left',
+                  width: '100%',
                 }}
-                onClick={() => handleToggleComplete(task)}
               >
                 {task.title}
               </button>
-              <button onClick={() => handleDelete(task.id)} style={{ marginLeft: 10 }}>
+              <button
+                className="delete-btn"
+                onClick={() => handleDelete(task.id)}
+                aria-label={`Supprimer la tâche ${task.title}`}
+              >
                 Supprimer
               </button>
             </li>
