@@ -1,6 +1,6 @@
-# Railway Fullstack App
+# Railway ToDo App
 
-Ce projet est une application de gestion de tâches collaborative (ToDo App) déployée sur Railway avec CI/CD via GitHub Actions.
+Application de gestion de tâches collaborative (ToDo App) déployée sur Railway avec CI/CD via GitHub Actions.
 
 ## 🚀 Démarrage rapide
 
@@ -10,76 +10,96 @@ git clone <url-du-repo>
 cd railway-app
 ```
 
-### 3. Lancer en local
-Dans deux terminaux séparés :
+### 2. Installer les dépendances
+```bash
+npm install
+```
+
+### 3. Configurer l'environnement
+Crée un fichier `.env` à la racine ou dans `backend/` avec :
+```env
+DATABASE_URL=postgresql://<user>:<password>@<host>:<port>/<database>
+PORT=3000
+```
+
+### 4. Lancer en local
 ```bash
 npm start
 ```
+L'application sera accessible sur [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## ⚙️ Configuration
+## 📚 Fonctionnalités
+- Ajout, suppression, validation de tâches
+- Interface moderne responsive (EJS + CSS)
+- API REST pour les tâches et endpoints de test
+- Connexion PostgreSQL (Railway ou local)
+- CI/CD avec GitHub Actions
 
-- Crée un fichier `.env` dans `backend/` avec :
-  ```env
-  DATABASE_URL=postgresql://postgres:IrykdMRYO0dsPHjjhXFhBAAlQ0TxXLOz@postgres.railway.internal:5432/railway
-  PORT=5000
-  ```
-- Pour Railway, configure les variables d'environnement dans le dashboard Railway.
+---
+
+## 🗂️ Structure du projet
+
+- `app.js` : Point d'entrée principal
+- `routes/` : Routes Express (`index`, `tasks`, `users`)
+- `src/` : Modèle de données (`taskModel.js`), middlewares, API
+- `views/` : Templates EJS (`index.ejs`, `error.ejs`, `layout.ejs`)
+- `public/stylesheets/` : Fichiers CSS personnalisés
+- `test/` : Tests unitaires (Jest/Supertest)
 
 ---
 
 ## 🛠️ Développement
-
-- **Backend** :
-  - Express.js
-  - Connexion à PostgreSQL (Railway)
-  - Routes REST pour gérer les tâches (CRUD)
-- **Frontend** :
-  - React.js
-  - Appels à l'API backend pour afficher et gérer les tâches
+- **Backend** : Node.js, Express, EJS
+- **Base de données** : PostgreSQL (Railway ou local)
+- **Frontend** : EJS (pas de React)
 
 ---
 
-## 🗄️ Base de données (PostgreSQL)
+## 📋 Endpoints principaux
 
-- Table principale : `tasks`
-  - `id` (UUID, PK)
-  - `title` (string)
-  - `completed` (boolean)
-  - `user` (string ou user_id)
+### Web
+- `/` : Page d'accueil, gestionnaire de tâches (ajout, suppression, validation)
+
+### API
+- `/api/v1` : Test API (GET)
+- `/api/v1/emojis` : Liste d'emojis (GET)
+
+### Tâches (POST)
+- `/tasks/add` : Ajouter une tâche (`title`)
+- `/tasks/toggle/:id` : Marquer comme terminée/à faire
+- `/tasks/delete/:id` : Supprimer une tâche
+
+---
+
+## 🧪 Tests
+Lance les tests avec :
+```bash
+npm test
+```
+Les tests couvrent l'API et les routes principales.
+
+---
+
+## 🎨 Personnalisation UI
+Modifie le fichier `public/stylesheets/style.css` pour personnaliser l'apparence de l'application.
 
 ---
 
 ## 🚀 Déploiement Railway
-
 1. Crée un compte sur [railway.app](https://railway.app)
-2. Crée un projet Railway
-3. Ajoute le plugin PostgreSQL
-4. Récupère l'URL de la base et configure-la dans les variables d'environnement
-5. Ajoute le token Railway dans les secrets GitHub (`RAILWAY_TOKEN`)
-6. Pousse sur `main` pour déclencher le déploiement
+2. Crée un projet Railway et ajoute le plugin PostgreSQL
+3. Configure l'URL de la base dans les variables d'environnement
+4. Ajoute le token Railway dans les secrets GitHub (`RAILWAY_TOKEN`)
+5. Pousse sur `main` pour déclencher le déploiement
 
 ---
 
-## 🤖 CI/CD avec GitHub Actions
-
-- Le workflow `.github/workflows/deploy.yml` installe les dépendances, lance les tests et déploie automatiquement sur Railway à chaque push sur `main`.
-
----
-
-## 📚 Utilisation
-
-- Accède à l'URL Railway pour utiliser l'application
-- Ajoute, modifie, supprime et termine des tâches
+## 📄 Licence
+MIT
 
 ---
 
-## 📁 Dossiers importants
-
-- `/` : Code source de l'API, connexion DB, routes, modèles ,pages
-- `.github/workflows/` : Fichiers de CI/CD
-
----
-
-Pour toute question, consulte la documentation dans chaque dossier ou ouvre une issue ! 
+## 🙋‍♂️ Questions
+Pour toute question, consulte la documentation ou ouvre une issue sur [GitHub](https://github.com/killer-pro/railway-app). 
