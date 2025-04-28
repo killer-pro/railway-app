@@ -1,12 +1,12 @@
 # Railway ToDo App
-
+PAR Mouhamadou diouf cissé
 Application de gestion de tâches collaborative (ToDo App) déployée sur Railway avec CI/CD via GitHub Actions.
 
 ## 🚀 Démarrage rapide
 
 ### 1. Cloner le dépôt
 ```bash
-git clone <url-du-repo>
+git clone https://github.com/killer-pro/railway-app
 cd railway-app
 ```
 
@@ -26,9 +26,7 @@ PORT=3000
 ```bash
 npm start
 ```
-L'application sera accessible sur [http://localhost:3000](http://localhost:3000)
 
----
 
 ## 📚 Fonctionnalités
 - Ajout, suppression, validation de tâches
