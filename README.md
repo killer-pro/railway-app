@@ -98,13 +98,4 @@ cd frontend && npm start
 
 ---
 
-## ✨ Pour aller plus loin
-
-- Ajouter l'authentification (JWT, OAuth...)
-- Ajouter des tests unitaires et d'intégration
-- Déployer sur un domaine personnalisé
-- Ajouter des notifications ou des deadlines aux tâches
-
----
-
 Pour toute question, consulte la documentation dans chaque dossier ou ouvre une issue ! 
